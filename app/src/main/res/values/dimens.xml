@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="activity_main_pm">16dp</dimen>
+    <dimen name="activity_main_ps">8dp</dimen>
+
+    <dimen name="activity_main_mh">24dp</dimen>
+    <dimen name="activity_main_mm">16dp</dimen>
+    <dimen name="activity_main_ms">4dp</dimen>
+</resources>

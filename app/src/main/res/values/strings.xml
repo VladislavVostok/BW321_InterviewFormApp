@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">InterviewFormApp</string>
+    <string name="label_tvFullName">ФИО</string>
+    <string name="placeholder_etFullName">Фамилия Имя Отчество</string>
+    <string name="label_tvAge">Возраст</string>
+    <string name="placeholder_etAge">23</string>
+    <string name="label_tvSlary">Уровень ЗП</string>
+
+    <!-- Вопросы -->
+    <string name="question_1">1. Какой язык программирования является оф. для Android?</string>
+    <string name="question_2">2. Lorem ipsum?</string>
+    <string name="question_3">3. Lorem ipsum?</string>
+    <string name="question_4">4. Lorem ipsum?</string>
+    <string name="question_5">5. Lorem ipsum?</string>
+</resources>

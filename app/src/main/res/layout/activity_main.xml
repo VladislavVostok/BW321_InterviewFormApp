@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_main_pm"
+    tools:context=".MainActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_main_ps"
+        android:orientation="vertical"
+        >
+
+        <!-- ФИО -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_tvFullName"
+            android:textSize="@dimen/activity_main_std_size_font"
+
+            />
+
+        <EditText
+            android:id="@+id/etFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/placeholder_etFullName"
+            android:inputType="textPersonName"
+            />
+
+        <!-- Возраст -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_tvAge"
+            android:textSize="@dimen/activity_main_std_size_font"
+
+            />
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/placeholder_etAge"
+            android:inputType="number"
+            />
+
+        <!-- ЗП -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_tvSlary"
+            android:textSize="@dimen/activity_main_std_size_font"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            android:layout_marginBottom="@dimen/activity_main_ms"
+            />
+
+        <SeekBar
+            android:id="@+id/sbSalary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="4000"
+            android:progress="1000"
+            android:min="100"
+            />
+        <TextView
+            android:id="@+id/tvSalaryValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1000 USD"
+            android:textSize="@dimen/activity_main_std_size_font"
+            android:textAlignment="center"
+            />
+        <!-- Вопросы -->
+        <!-- Вопрос 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_1"
+            android:textSize="@dimen/activity_main_std_size_font"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            />
+
+        <RadioGroup
+            android:id="@+id/rgQuestion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rbQ1Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Java"/>
+
+            <RadioButton
+                android:id="@+id/rbQ1Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kotlin"/>
+
+            <RadioButton
+                android:id="@+id/rbQ1Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C++"/>
+
+            <RadioButton
+                android:id="@+id/rbQ1Option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Python"/>
+        </RadioGroup>
+
+        <!-- Вопрос 2 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_2"
+            android:textSize="@dimen/activity_main_std_size_font"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            />
+
+        <RadioGroup
+            android:id="@+id/rgQuestion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rbQ2Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Java"/>
+
+            <RadioButton
+                android:id="@+id/rbQ2Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kotlin"/>
+
+            <RadioButton
+                android:id="@+id/rbQ2Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C++"/>
+
+            <RadioButton
+                android:id="@+id/rbQ2Option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Python"/>
+        </RadioGroup>
+
+        <!-- Вопрос 3 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_3"
+            android:textSize="@dimen/activity_main_std_size_font"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            />
+
+        <RadioGroup
+            android:id="@+id/rgQuestion3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rbQ3Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Java"/>
+
+            <RadioButton
+                android:id="@+id/rbQ3Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kotlin"/>
+
+            <RadioButton
+                android:id="@+id/rbQ3Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C++"/>
+
+            <RadioButton
+                android:id="@+id/rbQ3Option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Python"/>
+        </RadioGroup>
+
+        <!-- Вопрос 4 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_4"
+            android:textSize="@dimen/activity_main_std_size_font"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            />
+
+        <RadioGroup
+            android:id="@+id/rgQuestion4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rbQ4Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Java"/>
+
+            <RadioButton
+                android:id="@+id/rbQ4Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kotlin"/>
+
+            <RadioButton
+                android:id="@+id/rbQ4Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C++"/>
+
+            <RadioButton
+                android:id="@+id/rbQ4Option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Python"/>
+        </RadioGroup>
+
+        <!-- Вопрос 5 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_5"
+            android:textSize="@dimen/activity_main_std_size_font"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            />
+
+        <RadioGroup
+            android:id="@+id/rgQuestion5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rbQ5Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Java"/>
+
+            <RadioButton
+                android:id="@+id/rbQ5Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kotlin"/>
+
+            <RadioButton
+                android:id="@+id/rbQ5Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C++"/>
+
+            <RadioButton
+                android:id="@+id/rbQ5Option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Python"/>
+        </RadioGroup>
+
+
+<!-- Дополнительные параметры -->
+        <CheckBox
+            android:id="@+id/cbExperience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Опыт работы от 2 лет"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            />
+
+        <CheckBox
+            android:id="@+id/cbTeamwork"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Навыки командной разработки"
+
+            />
+
+        <CheckBox
+            android:id="@+id/cbBussinesTrips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Готовность к командировкам"
+            />
+
+<!-- Кнопка отправки данных -->
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сдать тест"
+            android:layout_marginTop="@dimen/activity_main_mh"
+            android:enabled="false"
+            />
+
+<!-- Результат -->
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_main_mm"
+            android:textSize="@dimen/activity_main_big_size_font"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+</ScrollView>
