@@ -1,26 +1,25 @@
 package com.example.interviewformapp
 
 import android.os.Bundle
+import android.util.Log
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.interviewformapp.ui.theme.InterviewFormAppTheme
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
 
 class MainActivity : ComponentActivity() {
 
@@ -95,6 +94,7 @@ class MainActivity : ComponentActivity() {
             }
 
             //Подсчёт балов
+            var correctAnswersCount = 0;
             var totalScore = 0
 
             correctAnswer.forEach {
@@ -102,39 +102,90 @@ class MainActivity : ComponentActivity() {
                 val selectedId = findViewById<RadioGroup>(questionGroupId).checkedRadioButtonId
 
                 if (selectedId == correctAnswerId){
+                    correctAnswersCount++
                     totalScore += 2
                 }
             }
 
             // Дополнительные балы
-            if(findViewById<CheckBox>(R.id.cbExperience).isChecked){
-                totalScore += 2
-            }
+            val hasExperience = findViewById<CheckBox>(R.id.cbExperience).isChecked
+            val hasTeamSkills = findViewById<CheckBox>(R.id.cbTeamwork).isChecked
+            val readyForTrips = findViewById<CheckBox>(R.id.cbBussinesTrips).isChecked
 
-            if(findViewById<CheckBox>(R.id.cbTeamwork).isChecked){
-                totalScore += 2
-            }
+            if(hasExperience) totalScore += 2
+            if(hasTeamSkills) totalScore += 2
+            if(readyForTrips) totalScore += 2
 
-            if(findViewById<CheckBox>(R.id.cbBussinesTrips).isChecked){
-                totalScore += 2
-            }
+            val passedInterview = totalScore >= 10
 
-            // Формирование результата
 
-            val resultMessage = if (totalScore >= 10){
-                "Поздравляем! Вы набрали $totalScore баллов и прошли тест.\n\n$companyContacts"
-            }
-            else{
-                "К сожалению, вы набрали только $totalScore баллов из 10 необходимых. " +
-                        "Попробуйте ещё раз через 6 месяцев."
-            }
-            tvResult.text = resultMessage
-            tvResult.visibility = View.VISIBLE
-            tvResult.alpha = 0f
-            tvResult.animate().alpha(1f).setDuration(500).start()
+            val candidate = Candidate(
+                fullName = etFullName.text.toString(),
+                age = etAge.text.toString().toInt(),
+                desiredSalary = sbSalary.progress,
+                correctAnswers = correctAnswersCount,
+                totalScore = totalScore,
+                hasExperience = hasExperience,
+                hasTeamSkills = hasTeamSkills,
+                readyForTrips = readyForTrips,
+                passedInterview = passedInterview
+            )
+
+
+            sendDataToServer(candidate, passedInterview, totalScore)
         }
 
     }
+
+    private fun sendDataToServer(candidate: Candidate, passed: Boolean, totalScore: Int){
+        val progressBar = ProgressBar(this).apply{
+            visibility = View.VISIBLE
+        }
+
+        (findViewById<View>(android.R.id.content) as ViewGroup).addView(progressBar)
+
+        RetrofitClient.instance.sendCandidateData(candidate).enqueue(object : Callback<ApiResponse> {
+
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>){
+                progressBar.visibility = View.GONE
+                (findViewById<View>(android.R.id.content) as ViewGroup).removeView(progressBar)
+
+                if(response.isSuccessful){
+                    val apiResponse = response.body()
+                    val resultMessage = if (passed){
+                        "Поздравляем! Вы набрали $totalScore баллов и прошли тест.\n\n" + "${apiResponse?.nextStep ?: companyContacts}"
+                    } else {
+                        "К сожалению, вы набрали только $totalScore баллов из 10 необходимых. " +
+                                "Попробуйте ещё раз через 6 месяцев."
+                    }
+                    findViewById<TextView>(R.id.tvResult).text = resultMessage
+
+
+                } else {
+                    val errorMessage = "Ошибка сервера: ${response.code()}"
+                    findViewById<TextView>(R.id.tvResult).text = errorMessage
+                    Log.e("API_ERROR", errorMessage)
+                }
+            findViewById<TextView>(R.id.tvResult).visibility = View.VISIBLE
+            findViewById<TextView>(R.id.tvResult).alpha = 0f
+            findViewById<TextView>(R.id.tvResult).animate().alpha(1f).setDuration(500).start()
+        }
+
+
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable){
+                progressBar.visibility = View.GONE
+                (findViewById<View>(android.R.id.content) as ViewGroup).removeView(progressBar)
+
+                val errorMessage = "Ошибка соединения: ${t.localizedMessage}"
+                findViewById<TextView>(R.id.tvResult).text = errorMessage
+                findViewById<TextView>(R.id.tvResult).visibility = View.VISIBLE
+                findViewById<TextView>(R.id.tvResult).alpha = 0f
+                findViewById<TextView>(R.id.tvResult).animate().alpha(1f).setDuration(500).start()
+
+                Log.e("API_FAILURE", errorMessage)
+            }
+            })
+        }
 
     private fun validateInput(fullName: String, age: Int, salary: Int):String?{
         if(fullName.split(" ").size < 3){
