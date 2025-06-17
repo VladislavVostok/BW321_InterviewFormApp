@@ -6,6 +6,6 @@ import retrofit2.http.POST
 
 
 interface ApiService {
-    @POST("candidate")
+    @POST("candidates")
     fun sendCandidateData(@Body candidate: Candidate): Call<ApiResponse>
 }

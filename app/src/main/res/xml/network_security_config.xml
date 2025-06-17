@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<network_security_config>
-<domain-conflict cleartextTrafficPermitted="true">
-    <domain includeSubdomains="true">
-        localhost
-    </domain>
-</domain-conflict>
-</network_security_config>
+<!--<network-security-config>-->
+<!--&lt;!&ndash; Разрешить HTTP-трафик для debug-сборок &ndash;&gt;-->
+<!--<debug-overrides>-->
+<!--    <trust-anchors>-->
+<!--        <certificates src="user" />-->
+<!--    </trust-anchors>-->
+<!--</debug-overrides>-->
+
+<!--&lt;!&ndash; Конфигурация для release &ndash;&gt;-->
+<!--<base-config cleartextTrafficPermitted="false">-->
+<!--    <trust-anchors>-->
+<!--        <certificates src="system" />-->
+<!--    </trust-anchors>-->
+<!--</base-config>-->
+<!--</network-security-config>-->
+
+<network-security-config>
+    <!-- Разрешить HTTP для конкретного IP -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">45.144.221.6</domain>
+    </domain-config>
+</network-security-config>
